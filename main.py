@@ -4,7 +4,7 @@ def main():
     
     word_count=count_words(book)
     char_distribution=char_tally(book)
-    # print (char_distribution)
+    
     pretty_results(path_to_book, word_count, char_distribution)
 
 def count_words(text):
@@ -16,11 +16,6 @@ def char_tally( text ):
 
     tally = {}
 
-    """ for word in lowercase_text.split():
-
-        for letter in list( word ):
-
-    """
     for letter in lowercase_text:
         if not ( letter in tally ):
 
@@ -46,19 +41,15 @@ def sort_dict(dict, index="value"):
     temp_array = []
 
     for key in dict:
-        #print(f"key: {key}")
-        #print(f"value: {dict[key]}")
         temp_array.append({"key":key, "value": dict[key]})
 
     def sort_on(d):
         return d[index]
     
     temp_array.sort(reverse=True, key=sort_on)
-    #print(f"temp_array: {temp_array}")
 
     sorted_dictionary = {}
     for item in temp_array:
-        #print(f"item: {item}")
         sorted_dictionary[item["key"]] = item["value"]
 
     return sorted_dictionary
@@ -68,8 +59,6 @@ def pretty_results(book ,word_count, char_dict):
 
     # formated strings limitation
     lines_of_text=char_dict['\n'] + 1
-
-    # character logic
 
     print(f"--- Begin report of {book} ---")
     print("")
