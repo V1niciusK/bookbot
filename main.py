@@ -5,7 +5,7 @@ def main():
     word_count=count_words(book)
     char_distribution=char_tally(book)
     # print (char_distribution)
-    prettify_results(path_to_book, word_count, char_distribution)
+    pretty_results(path_to_book, word_count, char_distribution)
 
 def count_words(text):
     return len(text.split())
@@ -40,8 +40,8 @@ def txt_file_to_string(path):
             print(f"Could not read file in {path}: {e}")
             exit()
 
-def sort_dict(dict):
-    print(f"sort_dict input: {dict}")
+def sort_dict(dict, index="value"):
+    
     #cumbersome implementation, to be improved
     temp_array = []
 
@@ -50,21 +50,21 @@ def sort_dict(dict):
         #print(f"value: {dict[key]}")
         temp_array.append({"key":key, "value": dict[key]})
 
-    def sort_on(dict):
-        return dict["value"]
+    def sort_on(d):
+        return d[index]
     
     temp_array.sort(reverse=True, key=sort_on)
-    print(f"temp_array: {temp_array}")
+    #print(f"temp_array: {temp_array}")
 
     sorted_dictionary = {}
     for item in temp_array:
-        print(f"item: {item}")
+        #print(f"item: {item}")
         sorted_dictionary[item["key"]] = item["value"]
 
     return sorted_dictionary
 
 
-def prettify_results(book ,word_count, char_dict):
+def pretty_results(book ,word_count, char_dict):
 
     # formated strings limitation
     lines_of_text=char_dict['\n'] + 1
@@ -80,10 +80,12 @@ def prettify_results(book ,word_count, char_dict):
     print(f"{word_count} words found in the document")
     print("")
     print("Character statistics")
-    
-    print(f"The TBD character was found TBD times ")
+    sorted_char_dict = sort_dict(char_dict)
+    for character in sorted_char_dict:
+        if character.isalpha():
+            print(f"The {character} character was found {sorted_char_dict[character]} times ")
 
-    print(sort_dict(char_dict))
+    print()
 
 
 main()
